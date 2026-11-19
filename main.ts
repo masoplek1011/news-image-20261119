@@ -18,8 +18,7 @@
 
 import { deflateSync } from "node:zlib";
 import { mkdirSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 
 const W = 1024;
 const H = 1024;
@@ -375,9 +374,6 @@ function main(): void {
   mkdirSync(outDir, { recursive: true });
   const png = encodePng();
   writeFileSync(join(outDir, "entry.png"), png);
-  // Also drop a copy next to the program when run locally, for inspection.
-  const here = dirname(fileURLToPath(import.meta.url));
-  writeFileSync(join(here, "entry.png"), png);
 }
 
 main();
